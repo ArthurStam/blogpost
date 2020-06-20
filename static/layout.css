@@ -1,0 +1,43 @@
+:root {
+  --header-height: 48px;
+}
+
+.header {
+  color: #fff;
+  background: #c4302b;
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+}
+
+.header_left {
+  display: flex;
+  align-items: baseline;
+}
+
+.header_action {
+  color: #fff;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo:hover {
+  opacity: 1;
+}
+
+.logo-action {
+  text-decoration: underline;
+}
+
+.logo-action:hover {
+  opacity: .7;
+}

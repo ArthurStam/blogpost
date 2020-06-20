@@ -1,0 +1,7 @@
+extends ./layout
+include ../mixins/post
+
+block content
+    .container
+        each post in posts
+            +post(post)

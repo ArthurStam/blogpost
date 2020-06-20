@@ -1,0 +1,23 @@
+.post {
+
+}
+
+.post_title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post_text {
+  font-size: var(--post-text-fs);
+  line-height: var(--post-text-lh);
+}
+
+.post_meta {
+  margin-top: 12px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.post_meta a {
+  color: inherit;
+}

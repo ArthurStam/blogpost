@@ -1,0 +1,45 @@
+:root {
+  --post-text-lh: 1.3;
+  --post-text-fs: 16px;
+}
+
+body, html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+form {
+  margin: 0;
+}
+
+h1, .h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 24px auto 16px;
+}
+
+h2, .h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 16px auto 12px;
+}
+
+a:hover {
+  opacity: .8;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  padding-left: 12px;
+  padding-right: 12px;
+  max-width: 1024px;
+  margin: auto;
+}

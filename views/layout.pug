@@ -1,0 +1,27 @@
+html
+  head
+    title Blog
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(charset='utf-8')
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' rel='stylesheet')
+    link(href='/common.css' rel='stylesheet')
+    link(href='/layout.css' rel='stylesheet')
+    block styles
+  body
+    header.header
+      .container.header_container
+        .header_left
+          a(href='/').logo Blog
+          a(href='/posts/create').logo.logo-action Post
+        .header_right
+          if !authenticated
+            a.header_action(href='/login') Login
+            = ' | '
+            a.header_action(href='/signup') Signup
+          else
+            a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
+            = ' | '
+            a.header_action(href='/logout') Logout
+    block content
+
+    block scripts

@@ -1,0 +1,15 @@
+extends ./layout
+
+block styles
+    link(rel='stylesheet' href='/login.css')
+
+block content
+    .container
+        h2 Login
+        form.form#form(action='/login' method='post')
+            .form_item
+                input(placeholder='Login' required='true' name='login' autofocus)
+            .form_item
+                input(type='password' placeholder='Password' required='true' name='password')
+            .form_item
+                button(type='submit') Submit

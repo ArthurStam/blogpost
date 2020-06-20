@@ -1,0 +1,13 @@
+mixin post(post)
+    link(rel='stylesheet' href='/mixins/post.css')
+    .post
+        h1.h1.post_title
+            a(href=`/posts/${post.post_id}`)= post.title
+        .post_text
+            | !{post.text}
+        .post_meta
+            .post_metaItem Author:&nbsp;
+                if post.author
+                    a(href=`/@${post.author}`) @#{post.author}
+                else
+                    = 'anonim'
