@@ -1,9 +1,5 @@
 @import "../form.css";
 
-.create {
-
-}
-
 .create_form {
   overflow: hidden;
   min-height: calc(100% - var(--header-height));

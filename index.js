@@ -59,7 +59,7 @@ app.post('/posts/create', (req, res) => {
   } else {
     posts.create(data).then((post_id) => {
       res.redirect(`/posts/${post_id}`);
-    }).catch((error) => {
+    }).catch(() => {
       res.sendStatus(400);
     })
   }

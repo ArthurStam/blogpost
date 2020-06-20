@@ -1,27 +1,36 @@
-html
-  head
-    title Blog
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(charset='utf-8')
-    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' rel='stylesheet')
-    link(href='/common.css' rel='stylesheet')
-    link(href='/layout.css' rel='stylesheet')
-    block styles
-  body
-    header.header
-      .container.header_container
-        .header_left
-          a(href='/').logo Blog
-          a(href='/posts/create').logo.logo-action Post
-        .header_right
-          if !authenticated
-            a.header_action(href='/login') Login
-            = ' | '
-            a.header_action(href='/signup') Signup
-          else
-            a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
-            = ' | '
-            a.header_action(href='/logout') Logout
-    block content
+- var mixinStyles = {}
 
-    block scripts
+doctype html
+html(lang='en')
+    head
+        title BlogPost
+        meta(name='description' content='One more platform for blogging')
+        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover')
+        meta(charset='utf-8')
+        link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' rel='stylesheet')
+        link(href='/css/common.css' rel='stylesheet')
+        link(href='/css/layout.css' rel='stylesheet')
+        link(href='/manifest.json' rel='manifest')
+        block styles
+    body
+        header.header
+            .container.header_container
+                .header_left
+                    a(href='/').logo Blog
+                    a(href='/posts/create').logo.logo-action Post
+                .header_right
+                    if !authenticated
+                        a.header_action(href='/login') Login
+                        = ' | '
+                        a.header_action(href='/signup') Signup
+                    else
+                        a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
+                        = ' | '
+                        a.header_action(href='/logout') Logout
+        block content
+
+        block scripts
+
+
+        for mixinName in Object.keys(mixinStyles)
+            link(rel='stylesheet' href=`/css/mixins/${mixinName}.css`)

@@ -1,9 +1,10 @@
 extends ../layout
 include ../../mixins/post
 
-block scripts
+block styles
+    link(rel='stylesheet' href='/css/posts/index.css')
 
 block content
-    .container
+    .container.postsPage
         each post in posts
             +post(post)

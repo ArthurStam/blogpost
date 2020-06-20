@@ -1,5 +1,5 @@
 mixin post(post)
-    link(rel='stylesheet' href='/mixins/post.css')
+    - mixinStyles.post = true
     .post
         h1.h1.post_title
             a(href=`/posts/${post.post_id}`)= post.title

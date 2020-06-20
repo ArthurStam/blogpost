@@ -1,15 +1,15 @@
 extends ./layout
 
 block styles
-    link(rel='stylesheet' href='/login.css')
+    link(rel='stylesheet' href='/css/login.css')
 
 block content
     .container
-        h2 Login
+        h1 Login
         form.form#form(action='/login' method='post')
             .form_item
-                input(placeholder='Login' required='true' name='login' autofocus)
+                input(autocomplete='login' placeholder='Login*' required='true' name='login' autofocus)
             .form_item
-                input(type='password' placeholder='Password' required='true' name='password')
+                input(autocomplete='current-password' type='password' placeholder='Password*' required='true' name='password')
             .form_item
                 button(type='submit') Submit

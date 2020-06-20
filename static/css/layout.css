@@ -1,10 +1,12 @@
 :root {
   --header-height: 48px;
+  --header-text-color: #fff;
+  --header-background-color: #c4302b;
 }
 
 .header {
-  color: #fff;
-  background: #c4302b;
+  color: var(--header-text-color);
+  background: var(--header-background-color);
 }
 
 .header_container {
@@ -20,14 +22,14 @@
 }
 
 .header_action {
-  color: #fff;
+  color: var(--header-text-color);
 }
 
 .logo {
   font-size: 30px;
   font-weight: 700;
   text-decoration: none;
-  color: #fff;
+  color: var(--header-text-color);
 }
 
 .logo:hover {

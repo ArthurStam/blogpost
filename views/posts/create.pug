@@ -1,12 +1,12 @@
 extends ../layout
 
 block styles
-  link(rel='stylesheet' href='/posts/create.css')
+  link(rel='stylesheet' href='/css/posts/create.css')
 
 block content
   .container.create
     form.create_form(action='/posts/create' method='post')
-      input(name='title' autocomplete='off' placeholder='Title' autofocus).create_formTitle.h1
-      textarea(name='text' autocomplete='off' placeholder='Mardown').create_formText
+      input(name='title' autocomplete='off' placeholder='Title' autofocus required).create_formTitle.h1
+      textarea(name='text' autocomplete='off' placeholder='Mardown' required).create_formText
       .create_actions
         button(type='submit') Post

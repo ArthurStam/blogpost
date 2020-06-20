@@ -1,5 +1,11 @@
-.post {
+:root {
+  --post-meta-color: #666;
+}
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --post-meta-color: #666;
+  }
 }
 
 .post_title a {
@@ -14,7 +20,7 @@
 
 .post_meta {
   margin-top: 12px;
-  color: #aaa;
+  color: var(--post-meta-color);
   font-size: 14px;
 }
 
