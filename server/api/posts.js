@@ -12,11 +12,19 @@ async function create({ title, text, user_id }) {
   return results.insertId;
 }
 
-async function get({ user_id } = {}) {
+async function get({ user_id, search } = {}) {
   let request = 'SELECT p.post_id,p.text,p.title,u.nickname AS author FROM posts p LEFT JOIN users u ON p.user_id=u.user_id'
-  if (user_id) {
-    request += ` WHERE u.user_id=${user_id}`;
+  const conditions = [];
+  if (user_id || search) {
+    request += ` WHERE `;
   }
+  if (user_id) {
+    conditions.push(`u.user_id=${user_id}`)
+  }
+  if (search) {
+    conditions.push(`MATCH(p.title) AGAINST (${escape(search)} IN NATURAL LANGUAGE MODE)`)
+  }
+  request += conditions.join(' AND ')
   return await query(request);
 }
 

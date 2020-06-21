@@ -6,5 +6,9 @@ block styles
 
 block content
     .container.postsPage
-        each post in posts
-            +post(post)
+        if posts.length > 0
+            each post in posts
+                +post(post)
+        else
+            .postsPage_empty
+                h1.h1.postsPage_emptyTitle Nothing found

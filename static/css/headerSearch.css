@@ -1,0 +1,42 @@
+.headerSearch {
+  color: var(--header-text-color);
+  position: relative;
+  width: 100%;
+}
+
+.headerSearch_control {
+  border: none;
+  outline: none;
+  padding: 0 32px;
+  height: var(--header-height);
+  background: transparent;
+  font-size: 20px;
+  color: var(--header-text-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.headerSearch_control::placeholder {
+  color: var(--header-text-color);
+  opacity: .4;
+}
+
+.headerSearch_icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -12px;
+}
+
+.headerSearch_cancel {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: none;
+  color: var(--header-text-color);
+  outline: none;
+}

@@ -1,36 +1,52 @@
 - var mixinStyles = {}
+include ../mixins/svg
 
 doctype html
 html(lang='en')
     head
         title BlogPost
         meta(name='description' content='One more platform for blogging')
-        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover')
+        meta(name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover')
         meta(charset='utf-8')
         link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' rel='stylesheet')
         link(href='/css/common.css' rel='stylesheet')
         link(href='/css/layout.css' rel='stylesheet')
         link(href='/manifest.json' rel='manifest')
+        svg(style='display: none')
+            defs
+                g(id='search_24')
+                    include ../static/images/svg/search_24.svg
+                g(id='cancel_24')
+                    include ../static/images/svg/cancel_24.svg
         block styles
     body
-        header.header
+        header.header#header(class=`${query.search && query.search.length > 0 ? 'header-search' : ''}`)
             .container.header_container
+                form.headerSearch.header_search(method='get' action='/')
+                    .headerSearch_icon
+                        +svg('search_24', 24)
+                    input.headerSearch_control#header-search-control(name='search' placeholder='Search' autocomplete='off' value=query.search)
+                    button.headerSearch_cancel#header-search-cancel(type='button')
+                        +svg('cancel_24', 24)
                 .header_left
                     a(href='/').logo Blog
                     a(href='/posts/create').logo.logo-action Post
                 .header_right
+                    button.header_searchToggle#header-search-toggle
+                        +svg('search_24', 24)
+                    div &nbsp;|&nbsp;
                     if !authenticated
                         a.header_action(href='/login') Login
-                        = ' | '
+                        div &nbsp;|&nbsp;
                         a.header_action(href='/signup') Signup
                     else
                         a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
-                        = ' | '
+                        div &nbsp;|&nbsp;
                         a.header_action(href='/logout') Logout
         block content
 
+        script(src='/js/layout.js' type='module')
         block scripts
-
 
         for mixinName in Object.keys(mixinStyles)
             link(rel='stylesheet' href=`/css/mixins/${mixinName}.css`)

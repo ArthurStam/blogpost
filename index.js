@@ -16,9 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('static'));
 app.use(authenticated);
+app.use((req, res, next) => {
+  res.locals.query = req.query;
+  next();
+})
 
 app.get('/', (req, res, next) => {
-  posts.get().then((posts) => {
+  posts.get({ search: req.query.search }).then((posts) => {
     res.render('posts', { posts: posts.map(markdownPost) });
   }).catch(() => {
     next();

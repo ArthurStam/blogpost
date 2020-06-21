@@ -1,3 +1,5 @@
+@import "./headerSearch.css";
+
 :root {
   --header-height: 48px;
   --header-text-color: #fff;
@@ -19,6 +21,31 @@
 .header_left {
   display: flex;
   align-items: baseline;
+}
+
+.header_right {
+  display: flex;
+  align-items: center;
+}
+
+.header-search .header_left,
+.header-search .header_right {
+  display: none;
+}
+
+.header:not(.header-search) .header_search {
+  display: none;
+}
+
+.header_searchToggle {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: var(--header-text-color);
+  outline: none;
+  position: relative;
 }
 
 .header_action {
