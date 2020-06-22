@@ -6,9 +6,19 @@
   --header-background-color: #c4302b;
 }
 
+body {
+  padding-top: calc(env(safe-area-inset-top) + var(--header-height));
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 .header {
+  padding-top: env(safe-area-inset-top);
   color: var(--header-text-color);
   background: var(--header-background-color);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 
 .header_container {

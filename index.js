@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const posts = require('./server/api/posts');
 const users = require('./server/api/users');
 const authenticated = require('./server/middlewares/authenticated');
+const query = require('./server/middlewares/query');
+const meta = require('./server/middlewares/meta');
 const errorCodes = require('./server/errorCodes');
 const { markdownPost } = require('./server/utils');
 
@@ -16,10 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('static'));
 app.use(authenticated);
-app.use((req, res, next) => {
-  res.locals.query = req.query;
-  next();
-})
+app.use(query);
+app.use(meta);
 
 app.get('/', (req, res, next) => {
   posts.get({ search: req.query.search }).then((posts) => {
@@ -71,6 +71,7 @@ app.post('/posts/create', (req, res) => {
 
 app.get('/posts/:post_id', (req, res, next) => {
   posts.getById({ post_id: req.params.post_id }).then((post) => {
+    req.setMeta({ title: post.title, description: post.text.slice(0, 100) });
     res.render('posts/post', { post: markdownPost(post) });
   }).catch((error) => {
     switch (error.message) {
@@ -152,4 +153,6 @@ app.use((req, res) => {
   res.sendStatus(500);
 })
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server is running on port 3000');
+});

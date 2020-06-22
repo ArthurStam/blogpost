@@ -17,11 +17,14 @@
 body,
 html {
   min-height: 100%;
+  cursor: default;
+  user-select: none;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   color: var(--default-text-color);
@@ -50,8 +53,9 @@ a {
   color: var(--default-link-color);
 }
 
-a:hover {
-  opacity: .8;
+a:hover,
+button:hover {
+  opacity: .7;
 }
 
 p {

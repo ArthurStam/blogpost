@@ -1,3 +1,4 @@
-mixin svg(iconName, width)
+mixin svg(iconName)
+    -var width = iconName.split('_')[1]
     svg(viewBox=`0 0 ${width} ${width}` width=`${width}` height=`${width}` style='display: block')
         use(xlink:href=`#${iconName}`)

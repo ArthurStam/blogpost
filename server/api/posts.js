@@ -13,7 +13,7 @@ async function create({ title, text, user_id }) {
 }
 
 async function get({ user_id, search } = {}) {
-  let request = 'SELECT p.post_id,p.text,p.title,u.nickname AS author FROM posts p LEFT JOIN users u ON p.user_id=u.user_id'
+  let request = 'SELECT p.created_at,p.post_id,p.text,p.title,u.nickname AS author FROM posts p LEFT JOIN users u ON p.user_id=u.user_id'
   const conditions = [];
   if (user_id || search) {
     request += ` WHERE `;
@@ -29,7 +29,7 @@ async function get({ user_id, search } = {}) {
 }
 
 async function getById({ post_id }) {
-  const results = await query(`SELECT p.post_id,p.text,p.title,u.nickname AS author FROM posts p LEFT JOIN users u ON p.user_id=u.user_id WHERE p.post_id=${post_id}`);
+  const results = await query(`SELECT p.created_at,p.post_id,p.text,p.title,u.nickname AS author FROM posts p LEFT JOIN users u ON p.user_id=u.user_id WHERE p.post_id=${post_id}`);
   if (results.length > 0) {
     return results[0];
   } else {
