@@ -5,15 +5,16 @@ block styles
 
 block content
     .container
-        h1 Signup
-        form.form#form(action='/signup' method='post')
-            .form_item
-                input(autocomplete='nickname' placeholder='Nickname*' name='nickname' required)
-            .form_item
-                input(autocomplete='login' placeholder='Login*' name='login' required)
-            .form_item
-                input(autocomplete='new-password' type='password' placeholder='Password*' name='password' required)
-            .form_item
-                input(autocomplete='new-password' type='password' placeholder='Repeat password*' name='password2' required)
-            .form_item
-                button(type='submit') Submit
+        .content
+            h1 Signup
+            form.form#form(action='/signup' method='post')
+                .form_item
+                    input(autocomplete='nickname' placeholder='Nickname*' name='nickname' required)
+                .form_item
+                    input(autocomplete='login' placeholder='Login*' name='login' required)
+                .form_item
+                    input(autocomplete='new-password' type='password' placeholder='Password*' name='password' required)
+                .form_item
+                    input(autocomplete='new-password' type='password' placeholder='Repeat password*' name='password2' required)
+                .form_item
+                    button(type='submit') Submit

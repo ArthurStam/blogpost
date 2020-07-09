@@ -1,0 +1,12 @@
+include ../mixins/comment
+include ../mixins/commentForm
+-partialStyles.comments = true
+
+.comments
+    if authenticated
+        .comments_form
+            +commentForm()
+    if comments.length
+        .comments_list
+            each comment in comments
+                +comment(comment)

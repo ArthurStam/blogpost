@@ -2,7 +2,7 @@ include ./date
 
 mixin post(post)
     - mixinStyles.post = true
-    .post
+    .content.post
         h1.h1.post_title
             a(href=`/posts/${post.post_id}`)= post.title
         .post_text

@@ -1,6 +1,12 @@
 extends ../layout
 include ../../mixins/post
 
+block styles
+    link(rel='stylesheet' href='/css/posts/post.css')
+
 block content
-    .container
-        +post(post)
+    .postsPage
+        .container
+            +post(post)
+            .content.postPage_comments
+                include ../../partials/comments

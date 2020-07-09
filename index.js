@@ -3,11 +3,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const posts = require('./server/api/posts');
 const users = require('./server/api/users');
+const comments = require('./server/api/comments');
 const authenticated = require('./server/middlewares/authenticated');
 const query = require('./server/middlewares/query');
 const meta = require('./server/middlewares/meta');
 const errorCodes = require('./server/errorCodes');
-const { markdownPost } = require('./server/utils');
+const { markdownPost, collapseComments } = require('./server/utils');
 
 const app = express();
 
@@ -70,9 +71,13 @@ app.post('/posts/create', (req, res) => {
 });
 
 app.get('/posts/:post_id', (req, res, next) => {
-  posts.getById({ post_id: req.params.post_id }).then((post) => {
+  const post_id = req.params.post_id;
+  Promise.all([
+    posts.getById({ post_id }),
+    comments.get({ post_id })
+  ]).then(([post, comments]) => {
     req.setMeta({ title: post.title, description: post.text.slice(0, 100) });
-    res.render('posts/post', { post: markdownPost(post) });
+    res.render('posts/post', { post: markdownPost(post), comments: collapseComments(comments) });
   }).catch((error) => {
     switch (error.message) {
       case errorCodes.ERROR_CODE_POST_NOT_FOUND:
@@ -148,6 +153,25 @@ app.get('/@:nickname', (req, res, next) => {
     }
   })
 });
+
+app.post('/comments/create', (req, res, next) => {
+  if (req.authenticated) {
+    const user_id = req.user_id;
+    const { text, post_id, parent_id } = req.body;
+
+    if (!text || !post_id || !user_id) {
+      res.sendStatus(400);
+    } else {
+      comments.create({ text, user_id, post_id, parent_id }).then(() => {
+        res.redirect(`/posts/${post_id}`);
+      }).catch(() => {
+        next();
+      })
+    }
+  } else {
+    res.sendStatus(400);
+  }
+})
 
 app.use((req, res) => {
   res.sendStatus(500);

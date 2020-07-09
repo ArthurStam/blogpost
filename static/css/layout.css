@@ -80,3 +80,7 @@ body {
 .logo-action:hover {
   opacity: .7;
 }
+
+.layout_content {
+  padding: 12px 0 40px;
+}

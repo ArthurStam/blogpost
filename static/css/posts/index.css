@@ -1,7 +1,3 @@
-.postsPage {
-  padding-bottom: 40px;
-}
-
 .postsPage_empty {
   display: flex;
   align-items: center;
@@ -10,4 +6,12 @@
 
 .postsPage_emptyTitle {
   color: #aaa;
+}
+
+.postsPage_post {
+  margin-bottom: 12px;
+}
+
+.postsPage_post:last-child {
+  margin-bottom: 0;
 }

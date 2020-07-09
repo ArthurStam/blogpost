@@ -5,11 +5,12 @@ block styles
 
 block content
     .container
-        h1 Login
-        form.form#form(action='/login' method='post')
-            .form_item
-                input(autocomplete='login' placeholder='Login*' required='true' name='login' autofocus)
-            .form_item
-                input(autocomplete='current-password' type='password' placeholder='Password*' required='true' name='password')
-            .form_item
-                button(type='submit') Submit
+        .content
+            h1 Login
+            form.form#form(action='/login' method='post')
+                .form_item
+                    input(autocomplete='login' placeholder='Login*' required='true' name='login' autofocus)
+                .form_item
+                    input(autocomplete='current-password' type='password' placeholder='Password*' required='true' name='password')
+                .form_item
+                    button(type='submit') Submit

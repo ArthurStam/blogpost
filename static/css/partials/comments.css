@@ -1,0 +1,7 @@
+.comments_form {
+  margin-bottom: 16px;
+}
+
+.comments_form:last-child {
+  margin-bottom: 0;
+}

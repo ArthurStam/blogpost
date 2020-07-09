@@ -1,0 +1,9 @@
+mixin commentForm(size='m', parent_id)
+    - mixinStyles.commentForm = true
+    form.commentForm(action='/comments/create' method='post' class=`commentForm-${size}`)
+        input(type='hidden' name='post_id' value=post.post_id)
+        if parent_id
+            input(type='hidden' name='parent_id' value=parent_id)
+        textarea.commentForm_text(name='text' placeholder='Comment text' required)
+        .commentForm_actions
+            button.commentForm_action Send comment

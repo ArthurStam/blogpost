@@ -1,3 +1,7 @@
 .form_item {
   margin-bottom: 10px;
 }
+
+.form_item input {
+  padding: 4px;
+}

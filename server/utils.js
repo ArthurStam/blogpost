@@ -9,6 +9,18 @@ function markdownPost(post) {
   }
 }
 
+function collapseComments(comments = [], parent_id = null) {
+  const filteredComments = comments.filter(comment => comment.parent_id === parent_id);
+
+  return filteredComments.map(comment => {
+    return {
+      ...comment,
+      child: collapseComments(comments, comment.comment_id)
+    }
+  });
+}
+
 module.exports = {
   markdownPost,
+  collapseComments,
 }

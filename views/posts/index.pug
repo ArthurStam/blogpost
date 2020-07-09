@@ -8,7 +8,8 @@ block content
     .container.postsPage
         if posts.length > 0
             each post in posts
-                +post(post)
+                .postsPage_post
+                    +post(post)
         else
             .postsPage_empty
                 h1.h1.postsPage_emptyTitle Nothing found

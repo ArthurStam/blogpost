@@ -1,5 +1,7 @@
 - var mixinStyles = {}
 - var mixinScripts = {}
+- var partialStyles = {}
+- var partialScripts = {}
 include ../mixins/svg
 
 doctype html
@@ -13,7 +15,6 @@ html(lang='en')
         meta(name='theme-color' content='#c4302b')
         meta(name='apple-mobile-web-app-status-bar-style' content='black-translucent')
         link(rel='apple-touch-icon' href='/images/apple-touch-icon.png')
-        link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' rel='stylesheet')
         link(href='/css/common.css' rel='stylesheet')
         link(href='/css/layout.css' rel='stylesheet')
         link(href='/manifest.json' rel='manifest')
@@ -25,35 +26,40 @@ html(lang='en')
                     include ../static/images/svg/cancel_24.svg
         block styles
     body
-        header.header#header(class=`${query.search && query.search.length > 0 ? 'header-search' : ''}`)
-            .container.header_container
-                form.headerSearch.header_search(method='get' action='/')
-                    .headerSearch_icon
-                        +svg('search_24')
-                    input.headerSearch_control#header-search-control(name='search' placeholder='Search' autocomplete='off' value=query.search)
-                    button.headerSearch_cancel#header-search-cancel(type='button' aria-label='Hide search')
-                        +svg('cancel_24')
-                .header_left
-                    a(href='/').logo Blog
-                    a(href='/posts/create').logo.logo-action Post
-                .header_right
-                    button.header_searchToggle#header-search-toggle(aria-label='Search')
-                        +svg('search_24')
-                    div &nbsp;&bull;&nbsp;
-                    if !authenticated
-                        a.header_action(href='/login') Login
+        .layout
+            header.header#header(class=`${query.search && query.search.length > 0 ? 'header-search' : ''}`)
+                .container.header_container
+                    form.headerSearch.header_search(method='get' action='/')
+                        .headerSearch_icon
+                            +svg('search_24')
+                        input.headerSearch_control#header-search-control(name='search' placeholder='Search' autocomplete='off' value=query.search)
+                        button.headerSearch_cancel#header-search-cancel(type='button' aria-label='Hide search')
+                            +svg('cancel_24')
+                    .header_left
+                        a(href='/').logo Blog
+                        a(href='/posts/create').logo.logo-action Post
+                    .header_right
+                        button.header_searchToggle#header-search-toggle(aria-label='Search')
+                            +svg('search_24')
                         div &nbsp;&bull;&nbsp;
-                        a.header_action(href='/signup') Signup
-                    else
-                        a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
-                        div &nbsp;&bull;&nbsp;
-                        a.header_action(href='/logout') Logout
-        block content
+                        if !authenticated
+                            a.header_action(href='/login') Login
+                            div &nbsp;&bull;&nbsp;
+                            a.header_action(href='/signup') Signup
+                        else
+                            a.header_action(href=`/@${currentUser.nickname}`) @#{currentUser.nickname}
+                            div &nbsp;&bull;&nbsp;
+                            a.header_action(href='/logout') Logout
+            .layout_content
+                block content
 
         script(src='/js/layout/index.js' type='module')
         block scripts
-
         for mixinName in Object.keys(mixinStyles)
             link(rel='stylesheet' href=`/css/mixins/${mixinName}.css`)
         for mixinName in Object.keys(mixinScripts)
             script(src=`/js/mixins/${mixinName}.js` type='module')
+        for partialName in Object.keys(partialStyles)
+            link(rel='stylesheet' href=`/css/partials/${partialName}.css`)
+        for partialName in Object.keys(partialScripts)
+            script(src=`/js/partials/${partialName}.js` type='module')
