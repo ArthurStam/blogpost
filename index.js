@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const md5 = require('md5');
+const path = require('path');
 const posts = require('./server/api/posts');
 const users = require('./server/api/users');
 const comments = require('./server/api/comments');
@@ -10,6 +13,16 @@ const meta = require('./server/middlewares/meta');
 const errorCodes = require('./server/errorCodes');
 const { markdownPost, collapseComments } = require('./server/utils');
 
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${md5(file.originalname)}${path.extname(file.originalname)}`);
+    }
+  })
+});
 const app = express();
 
 app.set('view engine', 'pug');
@@ -18,6 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('static'));
+app.use('/uploads', express.static('uploads'));
 app.use(authenticated);
 app.use(query);
 app.use(meta);
@@ -135,6 +149,14 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/profile', (req, res) => {
+  if (req.authenticated) {
+    res.render('profile');
+  } else {
+    res.redirect('/');
+  }
+})
+
 app.get('/@:nickname', (req, res, next) => {
   const nickname = req.params.nickname;
   users.get({ nickname }).then((user) => {
@@ -171,11 +193,22 @@ app.post('/comments/create', (req, res, next) => {
   } else {
     res.sendStatus(400);
   }
+});
+
+app.post('/profile/update', upload.single('avatar'), (req, res) => {
+  if (req.authenticated) {
+    const avatar = `/${req.file.path}`;
+    users.update({ avatar, user_id: req.user_id }).then(() => {
+      res.redirect('/profile');
+    });
+  } else {
+    res.sendStatus(401)
+  }
 })
 
 app.use((req, res) => {
   res.sendStatus(500);
-})
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on port 3000');

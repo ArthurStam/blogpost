@@ -1,0 +1,16 @@
+extends ./layout
+include ../mixins/avatar
+
+block styles
+    link(rel='stylesheet' href='/css/profile.css')
+
+block content
+    .container.profilePage
+        .content
+            form.profilePage_content(method='post' enctype='multipart/form-data' action='/profile/update')
+                .profilePage_avatar
+                    label(for='avatar-input')
+                        +avatar(currentUser.avatar, 92)
+                    input.profilePage_avatarInput(type='file' id='avatar-input' name='avatar' accept='.jpg,.png')
+                .h1.profilePage_nickname= `@${currentUser.nickname}`
+                button.profilePage_update(type='submit') Update

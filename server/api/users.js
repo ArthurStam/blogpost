@@ -13,6 +13,10 @@ function get({ nickname }) {
   })
 }
 
+async function update({ user_id, avatar }) {
+  return query(`UPDATE users SET avatar=${escape(avatar)} WHERE user_id=${Number(user_id)}`)
+}
+
 function login({ login, password }) {
   return query(`SELECT * FROM users WHERE login=${escape(login)}`).then((results) => {
     if (!results.length) {
@@ -50,4 +54,5 @@ module.exports = {
   login,
   signup,
   get,
+  update,
 }

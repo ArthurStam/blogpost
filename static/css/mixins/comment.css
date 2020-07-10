@@ -6,6 +6,18 @@
   user-select: text;
 }
 
+.comment_header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+
+.comment_avatar {
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
 .comment_children {
   margin-top: 16px;
   padding-left: 12px;
@@ -31,7 +43,6 @@
 .comment_date {
   color: var(--comment-date-color);
   font-size: 12px;
-  margin-bottom: 4px;
 }
 
 .comment_actions {

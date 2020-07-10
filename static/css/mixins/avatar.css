@@ -1,0 +1,10 @@
+.avatar {
+  border-radius: 50%;
+  background-color: var(--separator-color);
+  background-size: cover;
+  background-position: center center;
+}
+
+.avatar img {
+  max-width: 100%;
+}

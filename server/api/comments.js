@@ -23,7 +23,7 @@ async function get({ post_id }) {
     throw new Error(errorCodes.ERROR_CODE_COMMENTS_GET_VAlIDATION)
   } else {
     return await query(`
-      SELECT c.comment_id,c.parent_id,c.text,c.created_at,u.nickname AS author 
+      SELECT c.comment_id,c.parent_id,c.text,c.created_at,u.nickname AS author,u.avatar AS authorAvatar
       FROM comments c 
       JOIN users u 
       ON u.user_id = c.user_id 

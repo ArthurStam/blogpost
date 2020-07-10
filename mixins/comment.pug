@@ -1,12 +1,17 @@
 include ./date
+include ./avatar
 
 mixin comment(comment)
     - mixinStyles.comment = true
     - mixinScripts.comment = true
     .comment(data-comment data-comment-id=comment.comment_id)
-        a.comment_author(href=`/@${comment.author}`) @#{comment.author}
-        .comment_date
-            +date(comment.created_at)
+        .comment_header
+            .comment_avatar
+                +avatar(comment.authorAvatar, 36)
+            .comment_data
+                a.comment_author(href=`/@${comment.author}`) @#{comment.author}
+                .comment_date
+                    +date(comment.created_at)
         .comment_text= comment.text
         if authenticated
             .comment_actions

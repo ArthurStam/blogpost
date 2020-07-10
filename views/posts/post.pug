@@ -8,5 +8,6 @@ block content
     .postsPage
         .container
             +post(post)
-            .content.postPage_comments
-                include ../../partials/comments
+            if comments.length || authenticated
+                .content.postPage_comments
+                    include ../../partials/comments

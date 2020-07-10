@@ -1,0 +1,21 @@
+.profilePage_nickname {
+  margin-bottom: 0;
+}
+
+.profilePage_avatarInput {
+  display: none;
+}
+
+.profilePage_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.profilePage_update {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
